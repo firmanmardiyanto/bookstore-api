@@ -2,12 +2,20 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Str;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+    public function generateToken()
+    {
+        $this->api_token = Str::random(60);
+        $this->save();
+        return $this->api_token;
+    }
+
     use Notifiable;
 
     /**
@@ -16,7 +24,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'username', 'roles', 'address', 'city_id', 'province_id', 'phone', 'avatar', 'status'
+        'name', 'email', 'password', 'username', 'roles', 'address', 'city_id', 'province_id', 'phone', 'avatar', 'status', 'api_token'
     ];
 
     /**
