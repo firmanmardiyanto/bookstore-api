@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\Book as BookResource;
+use App\Http\Resources\Books as BookResourceCollection;
 use App\Models\Book;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -16,8 +16,8 @@ class BookController extends Controller
 
     public function index()
     {
-        $books = DB::select('select * from books');
-        return $books;
+        $criteria = Book::paginate(4);
+        return new BookResourceCollection($criteria);
     }
 
     public function view($id)
@@ -26,7 +26,16 @@ class BookController extends Controller
         $book = DB::select('select * from books where id = :id', ['id' => $id
         ]);
         */
-        $book = new BookResource(Book::find($id));
+        $book = new BookResourceCollection(Book::find($id));
         return $book;
+    }
+
+    public function top($count)
+    {
+        $criteria = Book::select('*')
+        ->orderBy('views', 'DESC')
+        ->limit($count)
+        ->get();
+        return new BookResourceCollection($criteria);
     }
 }
