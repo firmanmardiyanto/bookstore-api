@@ -24,7 +24,10 @@ Route::prefix('v1')->group(function() {
     Route::get('categories','CategoryController@index');
     Route::get('categories/random/{count}','CategoryController@random');
     Route::get('books/top/{count}','BookController@top');
+    Route::get('books/slug/{slug}', 'BookController@slug');
+    Route::get('books/search/{keyword}', 'BookController@search');
     Route::get('books', 'BookController@index');
+    Route::get('categories/slug/{slug}', 'CategoryController@slug');
 
     Route::middleware('auth:api')->group(function () {
         Route::post('logout', 'AuthController@logout');

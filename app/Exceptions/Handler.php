@@ -53,6 +53,8 @@ class Handler extends ExceptionHandler
      *
      * @throws \Throwable
      */
+
+     /*
     public function render($request, Throwable $exception)
     {
         // membaca konfigurasi, apakah aplikasi menggunakan modeproduction atau development
@@ -110,7 +112,7 @@ class Handler extends ExceptionHandler
             'message' => $message,
             'data' => null,
             'errors' => $errors,
-        ], $status_code);*/
+        ], $status_code);
         
         
         return response()->json([
@@ -119,5 +121,10 @@ class Handler extends ExceptionHandler
             'status_code' => $status_code
         ], $status_code);
         
+    }*/
+
+    public function render($request, Throwable $exception)
+    {
+        return parent::render($request, $exception);
     }
 }
