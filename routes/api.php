@@ -36,6 +36,8 @@ Route::prefix('v1')->group(function() {
     Route::post('logout', 'AuthController@logout');
     Route::post('shipping', 'ShopController@shipping');
     Route::post('services', 'ShopController@services');
+    Route::post('payment', 'ShopController@payment');
+    Route::post('my-order', 'ShopController@myOrder');
     });
 
     Route::get('book/{id}', 'BookController@view')->where('id', '[0-9]+');
